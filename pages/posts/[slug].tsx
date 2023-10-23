@@ -2,32 +2,15 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect, useRef } from 'react';
 
-import AdvertisingContentBottom from '../../components/advertising/contentBottom';
-import Aside from '../../components/aside';
 import DisqusComments from '../../components/disqusComments/disqusComments';
 import PostPageLayout from '../../components/layouts/postPageLayout';
 import { MdToHtml } from '../../components/markdown';
 import { getPostData } from '../../service/postHandler';
-import postMetadata, { getAllPostSlugs } from '../../service/postMetadata';
-import { resultObj, postData } from '../../types';
+import { getAllPostSlugs } from '../../service/postMetadata';
+import { postData } from '../../types';
 
 const PostPage = ({ postMetadata, content }: postData) => {
-  const {
-    title,
-    subtitle,
-    date,
-    author,
-    language,
-    category,
-    taxonomy,
-    ingredients,
-    weight,
-    slug,
-    description,
-    image,
-    calories,
-    time,
-  } = postMetadata;
+  const { title, language, category, slug, description, image, calories, time } = postMetadata;
   const ingridientsDiv = useRef<HTMLDivElement | null>(null);
   const directionsDiv = useRef<HTMLDivElement | null>(null);
   const ingridientsBtn = useRef<HTMLButtonElement | null>(null);
