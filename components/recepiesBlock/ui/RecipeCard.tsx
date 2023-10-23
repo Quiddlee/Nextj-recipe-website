@@ -9,17 +9,24 @@ type propsType = {
 
 export default function RecipeCard(props: propsType) {
   const { image, title, category, time, calories } = props.recipe;
+
   return (
-    <div className="cursor-pointer object-contain transition-all duration-300 hover:scale-[1.02] sm:w-[220px]">
+    <div className="max-h-[290px] cursor-pointer object-contain transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] sm:w-[220px]">
       <div className="relative z-10">
-        <Image width="130" height="130" src={image} alt="" className="recipeImg" />
+        <Image
+          width="220"
+          height="116"
+          src={image}
+          alt={title}
+          className="recipeImg rounded-t-[20px]"
+        />
         <div className="absolute bottom-[30px] left-[16px] flex gap-1 rounded-lg bg-primary-50 px-2 text-[10px] font-[500]">
           <Image src={cookingIcon} alt="" />
           {time} min
         </div>
       </div>
-      <div className="relative z-20 translate-y-[-20px] rounded-b-[20px] bg-primary-50 px-4 py-5 shadow-[0px_3px_10px_1px_rgba(200,200,200,1)]">
-        <h4 className="text-base font-[600]">{title}</h4>
+      <div className="relative z-20 translate-y-[-20px] rounded-b-[20px] bg-primary-50 px-4 py-5 shadow-[0px_4px_13px_0px_rgba(0,_0,_0,_0.05)]">
+        <h4 className="truncate text-base font-[600]">{title}</h4>
         <div className="mt-[33px] flex justify-between text-[12px] font-[500] text-primary-600">
           <p>{category}</p>
           <p>
