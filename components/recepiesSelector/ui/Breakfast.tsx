@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { memo } from 'react';
 
-export default function Breakfast({ color }: { color: string }) {
+const Breakfast = memo(function Breakfast({ color }: { color: string }) {
   return (
     <svg
       width="70"
@@ -17,4 +17,6 @@ export default function Breakfast({ color }: { color: string }) {
       <path d="M65.285 14.2428H62.7285C62.5396 14.2428 62.3585 14.3178 62.2249 14.4514C62.0914 14.5849 62.0164 14.7661 62.0164 14.9549C62.0164 15.1438 62.0914 15.3249 62.2249 15.4585C62.3585 15.592 62.5396 15.667 62.7285 15.667H65.2992C65.4881 15.667 65.6692 15.592 65.8028 15.4585C65.9363 15.3249 66.0114 15.1438 66.0114 14.9549C66.0114 14.7661 65.9363 14.5849 65.8028 14.4514C65.6692 14.3178 65.4881 14.2428 65.2992 14.2428H65.285Z" />
     </svg>
   );
-}
+});
+
+export default Breakfast;
