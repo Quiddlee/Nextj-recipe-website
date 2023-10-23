@@ -68,9 +68,23 @@ a:hover {
   justify-content: center;
 }
 
+.myPrev,
+.myNext {
+}
+
+
+.myPrev:hover .sliderArrow,
+.myNext:hover .sliderArrow {
+}
+
 .myPrev.swiper-button-disabled .sliderArrow,
 .myNext.swiper-button-disabled .sliderArrow {
-  fill: #989898;
+  fill: theme(colors.gray.200);
+}
+
+.myPrev.swiper-button-disabled,
+.myNext.swiper-button-disabled {
+  background: transparent !important;
 }
 
 .swiper-pagination-bullet {

@@ -41,7 +41,7 @@ export default function Slider() {
           <Image src={third} className="mySlide" alt="" />
         </SwiperSlide>
         <div className="mt-10 flex w-full justify-center gap-5">
-          <Button type="rounded" className="cursor-pointer p-2 transition-all">
+          <Button type="rounded" className="myPrev cursor-pointer p-2">
             <ArrowLeft />
           </Button>
           <div className="myPag flex items-center justify-around gap-[10px] "></div>
