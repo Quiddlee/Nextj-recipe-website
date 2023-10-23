@@ -53,10 +53,7 @@ const PostPage = ({ postMetadata, content }: postData) => {
               <div className="relative flex min-h-[280px] w-full flex-col gap-y-6 rounded-none pl-6 pr-24 pt-6 sm:pr-96 sm:pt-12 md:gap-y-8 md:rounded-3xl">
                 <div className="absolute inset-x-0 top-0 z-10 h-full w-full rounded-none bg-black/50 md:rounded-3xl"></div>
                 <Link href={'/'}>
-                  <Button
-                    className="relative z-20 !rounded-full !px-3 !py-2 hover:bg-black-400"
-                    type="empty"
-                  >
+                  <Button className="relative z-20 px-3 py-2 hover:bg-black-400" type="rounded">
                     <img
                       src="/assets/icons/arrowBack.svg"
                       className="relative z-20 h-5 w-4"
