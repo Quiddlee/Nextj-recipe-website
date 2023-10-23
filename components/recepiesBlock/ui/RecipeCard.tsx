@@ -11,15 +11,11 @@ export default function RecipeCard(props: propsType) {
   const { image, title, category, time, calories } = props.recipe;
 
   return (
-    <div className="max-h-[290px] cursor-pointer object-contain transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] sm:w-[220px]">
+    <div className="cursor-pointer object-contain transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] sm:w-[220px]">
       <div className="relative z-10">
-        <Image
-          width="220"
-          height="116"
-          src={image}
-          alt={title}
-          className="recipeImg rounded-t-[20px]"
-        />
+        <div className="h-[179px]">
+          <Image fill src={image} alt={title} className="rounded-t-[20px]" />
+        </div>
         <div className="absolute bottom-[30px] left-[16px] flex gap-1 rounded-lg bg-primary-50 px-2 text-[10px] font-[500]">
           <Image src={cookingIcon} alt="" />
           {time} min

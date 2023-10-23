@@ -18,7 +18,7 @@ const MainLayout = ({ children }: propsType) => {
         <Logo />
         <SearchInput />
       </header>
-      <section className="mx-auto mb-8 mt-5 w-full max-w-[955px] px-0 sm:mt-10 lg:px-0">
+      <section className="mx-auto mb-8 mt-5 w-full max-w-[955px] px-6 sm:mt-10 lg:px-0">
         {children}
         <SeoScripts />
       </section>

@@ -31,7 +31,7 @@ export default function SearchInput() {
 
   return (
     <div className="mt-6 w-full px-5 sm:absolute sm:right-[25px] sm:top-[10px] sm:mt-0 sm:w-[280px] sm:px-0">
-      <label htmlFor="searchInp" className="flex gap-[6px]">
+      <label htmlFor="searchInp" className="relative flex gap-[6px]">
         <Image className="absolute bottom-0 left-3 top-0 my-auto" src={searchIcon} alt="" />
         <input
           onBlur={() => {
