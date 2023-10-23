@@ -1,5 +1,7 @@
 import Image from 'next/image';
 
+import Link from 'next/link';
+
 import { IRecipe } from '../../../context/RecipeProvider';
 import cookingIcon from '../../../public/assets/icons/Cooking_time.svg';
 
@@ -8,10 +10,13 @@ type propsType = {
 };
 
 export default function RecipeCard(props: propsType) {
-  const { image, title, category, time, calories } = props.recipe;
+  const { image, title, category, time, calories, slug } = props.recipe;
 
   return (
-    <div className="cursor-pointer object-contain transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] sm:w-[220px]">
+    <Link
+      href={`/posts/${slug}`}
+      className="cursor-pointer object-contain text-black no-underline transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:text-black sm:w-[220px]"
+    >
       <div className="relative z-10">
         <div className="h-[179px]">
           <Image fill src={image} alt={title} className="rounded-t-[20px]" />
@@ -30,6 +35,6 @@ export default function RecipeCard(props: propsType) {
           </p>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
