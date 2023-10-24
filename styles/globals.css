@@ -70,23 +70,21 @@ a:hover {
 
 .myPrev,
 .myNext {
-  transition: all 0.3s;
-  border-radius: 50%;
 }
 
-.myPrev:hover,
-.myNext:hover {
-  background-color: #efefef;
-}
 
 .myPrev:hover .sliderArrow,
 .myNext:hover .sliderArrow {
-  fill: hsl(17, 85%, 47%);
 }
 
 .myPrev.swiper-button-disabled .sliderArrow,
 .myNext.swiper-button-disabled .sliderArrow {
-  fill: #989898;
+  fill: theme(colors.gray.200);
+}
+
+.myPrev.swiper-button-disabled,
+.myNext.swiper-button-disabled {
+  background: transparent !important;
 }
 
 .swiper-pagination-bullet {

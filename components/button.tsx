@@ -5,6 +5,8 @@ const buttonTypes = {
     'rounded-md bg-black-900 px-6 py-[14px] text-white hover:bg-black transition-all focus:border-transparent focus:outline-none focus:ring focus:ring-accent-600 focus:ring-opacity-50',
   empty:
     'rounded-md px-4 py-2 hover:bg-black-100 transition-all focus:border-transparent focus:outline-none focus:ring focus:ring-accent-600 focus:ring-opacity-50',
+  rounded:
+    'rounded-full hover:bg-black-100 transition-all focus:border-transparent focus:outline-none focus:ring focus:ring-accent-600 focus:ring-opacity-50',
 } as const;
 
 interface IButtonProps {

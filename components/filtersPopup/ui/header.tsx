@@ -9,11 +9,7 @@ function Header() {
 
   return (
     <header className="relative flex items-center border-b border-primary-100 px-6 py-5">
-      <Button
-        className="absolute cursor-pointer !rounded-full !px-1 !py-1"
-        onClick={hide}
-        type="empty"
-      >
+      <Button className="absolute cursor-pointer p-1" onClick={hide} type="rounded">
         <Image className="h-6 w-6" src={cross} alt="" />
       </Button>
 

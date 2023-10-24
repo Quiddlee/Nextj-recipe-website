@@ -2,32 +2,16 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect, useRef } from 'react';
 
-import AdvertisingContentBottom from '../../components/advertising/contentBottom';
-import Aside from '../../components/aside';
+import Button from '../../components/button';
 import DisqusComments from '../../components/disqusComments/disqusComments';
 import PostPageLayout from '../../components/layouts/postPageLayout';
 import { MdToHtml } from '../../components/markdown';
 import { getPostData } from '../../service/postHandler';
-import postMetadata, { getAllPostSlugs } from '../../service/postMetadata';
-import { resultObj, postData } from '../../types';
+import { getAllPostSlugs } from '../../service/postMetadata';
+import { postData } from '../../types';
 
 const PostPage = ({ postMetadata, content }: postData) => {
-  const {
-    title,
-    subtitle,
-    date,
-    author,
-    language,
-    category,
-    taxonomy,
-    ingredients,
-    weight,
-    slug,
-    description,
-    image,
-    calories,
-    time,
-  } = postMetadata;
+  const { title, language, category, slug, description, image, calories, time } = postMetadata;
   const ingridientsDiv = useRef<HTMLDivElement | null>(null);
   const directionsDiv = useRef<HTMLDivElement | null>(null);
   const ingridientsBtn = useRef<HTMLButtonElement | null>(null);
@@ -69,7 +53,13 @@ const PostPage = ({ postMetadata, content }: postData) => {
               <div className="relative flex min-h-[280px] w-full flex-col gap-y-6 rounded-none pl-6 pr-24 pt-6 sm:pr-96 sm:pt-12 md:gap-y-8 md:rounded-3xl">
                 <div className="absolute inset-x-0 top-0 z-10 h-full w-full rounded-none bg-black/50 md:rounded-3xl"></div>
                 <Link href={'/'}>
-                  <img src="/assets/icons/arrowBack.svg" className="relative z-20 h-5 w-4" alt="" />
+                  <Button className="relative z-20 px-3 py-2 hover:bg-black-400" type="rounded">
+                    <img
+                      src="/assets/icons/arrowBack.svg"
+                      className="relative z-20 h-5 w-4"
+                      alt=""
+                    />
+                  </Button>
                 </Link>
                 <Image
                   src={image}
