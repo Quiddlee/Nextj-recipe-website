@@ -21,7 +21,18 @@ enum FilterActionTypes {
   OPEN = 'filters/open',
   CLOSE = 'filters/close',
   MATCHED_RECIPE_NUM_UPDATED = 'filters/matchedRecipeNumUpdated',
+  CATEGORY_UPDATED = 'filters/categoryUpdated',
 }
+
+const categories = {
+  all: 'all',
+  breakfast: 'Завтрак',
+  desserts: 'desserts',
+  dinners: 'Обед',
+  lunches: 'lunches',
+} as const;
+
+export type Categories = keyof typeof categories;
 
 type InitialState = Readonly<{
   isVegan: boolean;
@@ -30,6 +41,7 @@ type InitialState = Readonly<{
   cooking: [number, number];
   isOpen: boolean;
   matchedRecipeNum: number;
+  activeCategory: Categories;
 }>;
 
 interface IAction {
@@ -50,6 +62,7 @@ interface IFiltersProvider extends InitialState {
   show: () => void;
   hide: () => void;
   applyFilters: (updateCallback: (newRecipes: IRecipe[]) => void) => void;
+  updateCategory: (newCategory: Categories) => void;
 }
 
 const initialState: InitialState = {
@@ -59,6 +72,7 @@ const initialState: InitialState = {
   isSpicy: false,
   isOpen: false,
   matchedRecipeNum: 0,
+  activeCategory: categories.all,
 };
 
 const FiltersContext = createContext<IFiltersProvider>({} as IFiltersProvider);
@@ -89,18 +103,21 @@ function reducer(state: InitialState, action: IAction): InitialState {
     case FilterActionTypes.MATCHED_RECIPE_NUM_UPDATED:
       return { ...state, matchedRecipeNum: action.payload };
 
+    case FilterActionTypes.CATEGORY_UPDATED:
+      return { ...state, activeCategory: action.payload };
+
     default:
       throw new Error('Unknown filter action!');
   }
 }
 
 function FiltersProvider({ children }: IFiltersProviderProps) {
-  const [{ isVegan, isSpicy, calories, cooking, isOpen, matchedRecipeNum }, dispatch] = useReducer(
-    reducer,
-    initialState
-  );
+  const [
+    { isVegan, isSpicy, calories, cooking, isOpen, matchedRecipeNum, activeCategory },
+    dispatch,
+  ] = useReducer(reducer, initialState);
   const applyedFilters = useRef<IRecipe[]>([]);
-  const { recipes, allRecipes } = useRecipes();
+  const { recipes, allRecipes, updateRecipes } = useRecipes();
 
   const updateCooking = useCallback(
     (min: number, max: number) =>
@@ -146,6 +163,27 @@ function FiltersProvider({ children }: IFiltersProviderProps) {
     updateCallback(applyedFilters.current);
   }, []);
 
+  const updateCategory = useCallback(
+    (newCategory: Categories) => {
+      dispatch({ type: FilterActionTypes.CATEGORY_UPDATED, payload: newCategory });
+
+      // if user clicked on "all" categories update recipe list with already applied filters
+      // without category filter
+      if (newCategory === 'all') {
+        updateRecipes(applyedFilters.current);
+        return;
+      }
+
+      const categoryFilter = filterEssentials(
+        categories[newCategory],
+        applyedFilters.current,
+        'category'
+      );
+      updateRecipes(categoryFilter);
+    },
+    [updateRecipes]
+  );
+
   useEffect(() => {
     const caloryFilter = filterRange(calories, allRecipes, 'calories');
     const cookingTimeFilter = filterRange(cooking, caloryFilter, 'time');
@@ -153,29 +191,32 @@ function FiltersProvider({ children }: IFiltersProviderProps) {
     const isSpicyFilter = filterEssentials(isSpicy, isVeganFilter, 'isSpicy');
 
     applyedFilters.current = isSpicyFilter;
-    dispatch({ type: FilterActionTypes.MATCHED_RECIPE_NUM_UPDATED, payload: isSpicyFilter.length });
-  }, [calories, cooking, isSpicy, isVegan, recipes]);
+    dispatch({
+      type: FilterActionTypes.MATCHED_RECIPE_NUM_UPDATED,
+      payload: isSpicyFilter.length,
+    });
+  }, [activeCategory, allRecipes, calories, cooking, isSpicy, isVegan, recipes]);
 
   return (
     <FiltersContext.Provider
-      value={
-        {
-          isVegan,
-          isSpicy,
-          calories,
-          cooking,
-          isOpen,
-          updateCooking,
-          updateCalories,
-          updateSpicy,
-          updateVegan,
-          clearAll,
-          show,
-          hide,
-          applyFilters,
-          matchedRecipeNum,
-        } as IFiltersProvider
-      }
+      value={{
+        isVegan,
+        isSpicy,
+        calories,
+        cooking,
+        isOpen,
+        updateCooking,
+        updateCalories,
+        updateSpicy,
+        updateVegan,
+        clearAll,
+        show,
+        hide,
+        applyFilters,
+        matchedRecipeNum,
+        updateCategory,
+        activeCategory,
+      }}
     >
       {children}
     </FiltersContext.Provider>

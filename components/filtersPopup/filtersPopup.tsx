@@ -11,7 +11,7 @@ interface IOpenProps {
 }
 
 function Filters({ children }) {
-  return children;
+  return <div className="relative">{children}</div>;
 }
 
 function FiltersPopup() {

@@ -7,27 +7,27 @@ import Lunches from '../ui/Lunches';
 export const categories = [
   {
     Elem: AllRecipes,
-    title: 'All recepies',
+    title: 'Все рецепты',
     key: 'all',
   },
   {
     Elem: Breakfast,
-    title: 'Breakfast',
+    title: 'Завтраки',
     key: 'breakfast',
   },
   {
     Elem: Dinners,
-    title: 'Dinners',
+    title: 'Обеды',
     key: 'dinners',
   },
   {
     Elem: Lunches,
-    title: 'Lunches',
+    title: 'Ланчи',
     key: 'lunches',
   },
   {
     Elem: Desserts,
-    title: 'Desserts',
+    title: 'Дессерты',
     key: 'desserts',
   },
-];
+] as const;
